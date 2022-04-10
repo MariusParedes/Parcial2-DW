@@ -1,0 +1,78 @@
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 11-04-2022 a las 00:00:38
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.0.17
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Base de datos: `colegio`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clase`
+--
+
+CREATE TABLE `clase` (
+  `IdClase` int(11) NOT NULL,
+  `Curso` varchar(255) DEFAULT NULL,
+  `Dia` int(11) DEFAULT NULL,
+  `Horas` int(11) DEFAULT NULL,
+  `IdProfesor` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `profesor`
+--
+
+CREATE TABLE `profesor` (
+  `IdProfesor` int(11) NOT NULL,
+  `Nombre` varchar(255) DEFAULT NULL,
+  `Apellido` varchar(255) DEFAULT NULL,
+  `Departamento` varchar(255) DEFAULT NULL,
+  `Oficina` int(11) DEFAULT NULL,
+  `FechaIngreso` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `profesor`
+--
+
+INSERT INTO `profesor` (`IdProfesor`, `Nombre`, `Apellido`, `Departamento`, `Oficina`, `FechaIngreso`) VALUES
+(1, 'Marius', 'Paredes', 'Informatica', 1, '2021-03-08'),
+(2, 'LESLY', 'Salazar', 'Informatica', 2, '2021-03-09');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `clase`
+--
+ALTER TABLE `clase`
+  ADD PRIMARY KEY (`IdClase`),
+  ADD KEY `IdProfesor` (`IdProfesor`);
+
+--
+-- Indices de la tabla `profesor`
+--
+ALTER TABLE `profesor`
+  ADD PRIMARY KEY (`IdProfesor`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `clase`
+--
+ALTER TABLE `clase`
+  ADD CONSTRAINT `clase_ibfk_1` FOREIGN KEY (`IdProfesor`) REFERENCES `profesor` (`IdProfesor`);
+COMMIT;
